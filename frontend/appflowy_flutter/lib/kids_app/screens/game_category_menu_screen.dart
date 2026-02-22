@@ -5,6 +5,7 @@ import 'games/animal_sound_match_screen.dart';
 import 'games/balloon_pop_screen.dart';
 import 'games/shape_sorter_screen.dart';
 import 'games/trace_letters_v1_screen.dart';
+import 'mission_control_screen.dart';
 
 class GameCategoryMenuScreen extends StatelessWidget {
   const GameCategoryMenuScreen({super.key});
@@ -64,7 +65,7 @@ class GameCategoryMenuScreen extends StatelessWidget {
                     title: 'Colors',
                     color: const Color(0xFF4FC3F7), // card-blue
                     icon: Icons.palette,
-                    destination: const TraceLettersV1Screen(), // Placeholder
+                    destination: const TraceLettersV1Screen(),
                     rotation: -2,
                   ),
                   _buildCard(
@@ -82,6 +83,14 @@ class GameCategoryMenuScreen extends StatelessWidget {
                     icon: Icons.category,
                     destination: const ShapeSorterScreen(),
                     rotation: -1,
+                  ),
+                  _buildCard(
+                    context,
+                    title: 'Space',
+                    color: const Color(0xFF161B33),
+                    icon: Icons.rocket_launch,
+                    destination: const MissionControlScreen(),
+                    rotation: 2,
                   ),
                 ],
               ),

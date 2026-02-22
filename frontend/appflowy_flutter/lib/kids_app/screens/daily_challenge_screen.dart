@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'daily_challenge_gift_screen.dart';
 
 class DailyChallengeScreen extends StatelessWidget {
   const DailyChallengeScreen({super.key});
@@ -69,34 +70,42 @@ class DailyChallengeScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: Center(
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(colors: [Color(0xFFFBBF24), Color(0xFFF97316)]),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      'Big Sticker!',
-                      style: GoogleFonts.plusJakartaSans(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const DailyChallengeGiftScreen()),
+                  );
+                },
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(colors: [Color(0xFFFBBF24), Color(0xFFF97316)]),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        'Big Sticker!',
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    width: 100,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFEF3C7),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: const Color(0xFFB45309), width: 4),
+                    const SizedBox(height: 8),
+                    Container(
+                      width: 100,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFEF3C7),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: const Color(0xFFB45309), width: 4),
+                      ),
+                      child: const Icon(Icons.lock, color: Color(0xFFB45309), size: 32),
                     ),
-                    child: const Icon(Icons.lock, color: Color(0xFFB45309), size: 32),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

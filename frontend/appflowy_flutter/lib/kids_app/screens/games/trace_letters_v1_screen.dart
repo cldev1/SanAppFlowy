@@ -9,6 +9,8 @@ class TraceLettersV1Screen extends StatefulWidget {
 }
 
 class _TraceLettersV1ScreenState extends State<TraceLettersV1Screen> {
+  List<Offset> points = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,18 +60,25 @@ class _TraceLettersV1ScreenState extends State<TraceLettersV1Screen> {
                       ),
                     ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      'Skip',
-                      style: GoogleFonts.lexend(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: const Color(0xFF334155),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        points.clear();
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        'Reset',
+                        style: GoogleFonts.lexend(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF334155),
+                        ),
                       ),
                     ),
                   ),
@@ -160,7 +169,21 @@ class _TraceLettersV1ScreenState extends State<TraceLettersV1Screen> {
                     ),
                   ),
 
-                  // Bee Character
+                  // Drawing Area
+                  GestureDetector(
+                    onPanUpdate: (details) {
+                      setState(() {
+                        points.add(details.localPosition);
+                      });
+                    },
+                    onPanEnd: (details) => points.add(Offset.infinite),
+                    child: CustomPaint(
+                      size: const Size(320, 420),
+                      painter: DrawingPainter(points: points),
+                    ),
+                  ),
+
+                  // Bee Character (Simplified Movement)
                   Positioned(
                     bottom: 110,
                     left: 40,
@@ -241,4 +264,27 @@ class _TraceLettersV1ScreenState extends State<TraceLettersV1Screen> {
       ),
     );
   }
+}
+
+class DrawingPainter extends CustomPainter {
+  final List<Offset> points;
+
+  DrawingPainter({required this.points});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFFF2CC0D).withOpacity(0.8)
+      ..strokeWidth = 25
+      ..strokeCap = StrokeCap.round;
+
+    for (int i = 0; i < points.length - 1; i++) {
+      if (points[i] != Offset.infinite && points[i + 1] != Offset.infinite) {
+        canvas.drawLine(points[i], points[i + 1], paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

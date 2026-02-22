@@ -11,6 +11,7 @@ import 'games/xylophone_screen.dart';
 import 'games/shape_sorter_screen.dart';
 import 'daily_challenge_screen.dart';
 import 'parental_gate_screen.dart';
+import 'sticker_rewards_screen.dart';
 
 class ForestAdventureScreen extends StatelessWidget {
   const ForestAdventureScreen({super.key});
@@ -309,7 +310,7 @@ class ForestAdventureScreen extends StatelessWidget {
                 child: const Icon(Icons.pets, size: 32, color: Colors.white),
               ),
             ),
-            _buildNavItem(context, Icons.emoji_events, 'Prizes', false),
+            _buildNavItem(context, Icons.emoji_events, 'Prizes', false, destination: const StickerRewardsScreen()),
             _buildNavItem(context, Icons.settings, 'Grown-ups', false, destination: const ParentalGateScreen()),
           ],
         ),
